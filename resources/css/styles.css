@@ -1,136 +1,168 @@
-/* Set box-sizing globally for all elements */
+/* ====================================================
+   GLOBAL STYLES
+==================================================== */
 *,
 *::before,
 *::after {
   box-sizing: border-box;
 }
 
+/* ====================================================
+   BODY & MAIN CONTAINER
+==================================================== */
 body {
-    font-family: sans-serif;
-    margin: 0;
-    padding: 0;
-    background: #f5f5f5;
-  }
-  
-  h1 {
-    text-align: center;
-    margin-top: 1rem;
-  }
-  
-  .container {
-    max-width: 900px;
-    margin: 0 auto;
-    padding: 2rem;
-    background: #fff;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    border-radius: 12px;
-  }
-  
-  /* Style controls with proper alignment */
-  .controls {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1rem;
-    justify-content: center;
-    margin-bottom: 2rem;
-    padding: 1rem;
-    background-color: #f9f9f9;
-    border-radius: 12px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  }
-  
-  /* Wrap label and input/select in a flex container */
-  .control-group {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 5px;
-  }
-  
-  /* Button container for next line */
-  .button-group {
-    flex-basis: 100%; /* Forces buttons to go to the next line */
-    display: flex;
-    justify-content: center;
-    gap: 1rem;
-  }
-  
-  /* Consistent label styling */
-  label {
-    font-weight: bold;
-  }
-  
-  /* Input and select styling with increased width */
-  input, select {
-    padding: 8px;
-    width: 146px; /* Increased width to 130px */
-    text-align: center;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    -moz-appearance: textfield;
-    appearance: none;
-  }
-  
-  /* Hide increment/decrement arrows for number inputs */
-  input[type="number"]::-webkit-outer-spin-button,
-  input[type="number"]::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
-  }
-  
-  /* Hide arrows for Edge */
-  input[type="number"]::-ms-clear {
-    display: none;
-  }
-  
-  /* Button styling */
-  button {
-    padding: 10px 15px;
-    font-size: 14px;
-    cursor: pointer;
-    border-radius: 8px;
-    border: none;
-    outline: none;
-    width: 135px; /* Ensure button width is consistent */
-  }
-  
-  #generateButton {
-    background-color: #4caf50;
-    color: white;
-  }
-  
-  #generateButton:hover {
-    background-color: #45a049;
-  }
-  
-  #downloadButton {
-    background-color: #2196f3;
-    color: white;
-    cursor: not-allowed;
-  }
-  
-  #downloadButton.enabled {
-    cursor: pointer;
-    background-color: #1976d2;
-  }
-  
-  #downloadButton.enabled:hover {
-    background-color: #1565c0;
-  }
-  
-  /* Worksheet grid styling */
-  .worksheet {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 1rem;
-    text-align: center;
-    margin-top: 1rem;
-  }
-  
-  .worksheet div {
-    border: 1px solid #ccc;
-    padding: 1rem;
-    background-color: #fff;
-    border-radius: 12px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  }
+  font-family: sans-serif;
+  margin: 0;
+  padding: 0;
+  background: #f5f5f5;
+}
+
+h1 {
+  text-align: center;
+  margin-top: 1rem;
+}
+
+/* ====================================================
+   DESCRIPTION SECTION
+==================================================== */
+.description {
+  text-align: center;
+  font-size: 1rem;
+  margin-top: -0.5rem;
+  margin-bottom: 1.5rem;
+  color: #555;
+  max-width: 650px;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.6;
+}
+
+/* ====================================================
+   CONTAINER & CONTROLS
+==================================================== */
+.container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 2rem;
+  background: #fff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+}
+
+.controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 2rem;
+  padding: 1rem;
+  background-color: #f9f9f9;
+  border-radius: 12px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* ====================================================
+   CONTROL GROUPS & INPUTS
+==================================================== */
+.control-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+}
+
+label {
+  font-weight: bold;
+}
+
+/* Input and select styling */
+input,
+select {
+  padding: 8px;
+  width: 130px;
+  height: 38px;
+  text-align: center;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  -moz-appearance: textfield;
+  appearance: none;
+}
+
+/* Hide increment/decrement arrows for number inputs */
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Hide arrows for Edge */
+input[type="number"]::-ms-clear {
+  display: none;
+}
+
+/* ====================================================
+   BUTTON STYLING
+==================================================== */
+.button-group {
+  flex-basis: 100%;
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+
+button {
+  padding: 10px 15px;
+  font-size: 14px;
+  cursor: pointer;
+  border-radius: 8px;
+  border: none;
+  outline: none;
+  width: 130px;
+  height: 38px;
+}
+
+/* Generate button styles */
+#generateButton {
+  background-color: #4caf50;
+  color: white;
+}
+
+#generateButton:hover {
+  background-color: #45a049;
+}
+
+/* Download button styles */
+#downloadButton {
+  background-color: #2196f3;
+  color: white;
+  cursor: not-allowed;
+}
+
+#downloadButton.enabled {
+  cursor: pointer;
+  background-color: #1976d2;
+}
+
+#downloadButton.enabled:hover {
+  background-color: #1565c0;
+}
+
+/* ====================================================
+   WORKSHEET STYLING
+==================================================== */
+.worksheet {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+  text-align: center;
+  margin-top: 1rem;
+}
+
+.worksheet div {
+  border: 1px solid #ccc;
+  padding: 1rem;
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
