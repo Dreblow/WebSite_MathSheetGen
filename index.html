@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Math Worksheet Generator</title>
+    <link rel="stylesheet" href="./resources/css/styles.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h1>Math Worksheet Generator</h1>
+
+      <!-- Controls for Problem Generation -->
+      <div class="controls">
+        <div class="control-group">
+          <label for="problemsPerPage">Problems per page:</label>
+          <input
+            type="number"
+            id="problemsPerPage"
+            value="20"
+            min="1"
+            max="100"
+          />
+        </div>
+
+        <div class="control-group">
+          <label for="numPages">Number of pages:</label>
+          <input type="number" id="numPages" value="1" min="1" max="10" />
+        </div>
+
+        <div class="control-group">
+          <label for="minNumber">Min:</label>
+          <input type="number" id="minNumber" value="1" min="1" />
+        </div>
+
+        <div class="control-group">
+          <label for="maxNumber">Max:</label>
+          <input type="number" id="maxNumber" value="100" min="1" />
+        </div>
+
+        <!-- New Dropdown for Operation Selection -->
+        <div class="control-group">
+          <label for="operation">Operation:</label>
+          <select id="operation">
+            <option value="add">Addition</option>
+            <option value="subtract">Subtraction</option>
+            <option value="mixed">Mixed</option>
+          </select>
+        </div>
+
+        <!-- Buttons in a separate container to ensure they move to the next line -->
+        <div class="button-group">
+          <button id="generateButton">Generate</button>
+          <button id="downloadButton" disabled>Download PDF</button>
+        </div>
+      </div>
+
+      <!-- Container where the problems will be rendered -->
+      <div id="worksheet" class="worksheet"></div>
+    </div>
+
+    <script src="./resources/js/index.js" type="module"></script>
+  </body>
+</html>
