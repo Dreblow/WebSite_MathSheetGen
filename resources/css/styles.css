@@ -134,35 +134,90 @@ button {
 
 /* Download button styles */
 #downloadButton {
-  background-color: #2196f3;
-  color: white;
-  cursor: not-allowed;
+    background-color: #2196f3;
+    color: white;
+    cursor: not-allowed;
 }
 
 #downloadButton.enabled {
-  cursor: pointer;
-  background-color: #1976d2;
+    cursor: pointer;
+    background-color: #1976d2;
 }
 
 #downloadButton.enabled:hover {
-  background-color: #1565c0;
+    background-color: #1565c0;
 }
 
+/* ====================================================
+   WORKSHEET CONTAINER STYLING
+==================================================== */
+.worksheet-container {
+    display: flex;
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    min-height: 100vh; /* Minimum height to center */
+    padding: 2rem;
+    box-sizing: border-box;
+    background-color: #f5f5f5; /* Light background for paper effect */
+  }
+  
 /* ====================================================
    WORKSHEET STYLING
 ==================================================== */
 .worksheet {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 1rem;
-  text-align: center;
-  margin-top: 1rem;
+    display: grid;
+    grid-template-columns: repeat(4, 80px); /* Set explicit width for columns */
+    gap: 1.5rem; /* Slightly increase gap for better spacing */
+    justify-content: center; /* Center grid horizontally */
+    text-align: center;
+    padding: 1.5rem;
+    width: 8.5in; /* Letter paper width */
+    height: 11in; /* Letter paper height */
+    border: 2px solid #ccc;
+    border-radius: 6px;
+    background-color: #fff;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    margin: auto;
+    overflow: hidden;
+  }
+  
+/* Style for individual problem divs */
+.problem {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end; /* Right-align numbers */
+    justify-content: flex-start;
+    padding: 0.5rem;
+    width: 70px; /* Set consistent width for grid alignment */
+    text-align: right;
+    font-size: 20px;
+    font-family: 'Arial', sans-serif;
+}
+  
+/* Top number style */
+.top-number {
+    font-size: 24px;
+    font-weight: normal;
+    margin-bottom: 2px;
 }
 
-.worksheet div {
-  border: 1px solid #ccc;
-  padding: 1rem;
-  background-color: #fff;
-  border-radius: 12px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+/* Bottom number with the + or - sign */
+.bottom-number {
+    font-size: 24px;
+}
+
+/* Dashed line to represent the answer area */
+.answer-line {
+    width: 50px;
+    height: 2px;
+    background: #000;
+    margin-top: 4px;
+    margin-bottom: 4px;
+}
+
+/* ====================================================
+PAGE BREAKS FOR MULTIPLE PAGES (Optional for PDF)
+==================================================== */
+.page-break {
+    page-break-before: always; /* Add page break between problem sets */
 }
