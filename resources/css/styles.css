@@ -180,8 +180,8 @@ button {
     display: flex;
     justify-content: space-between;
     font-size: 16px;
-    height: 50px;
-    padding: 0 3rem; /* Add padding to prevent name and date from being too close to the edge */
+    height: 60px;
+    padding: 0 3rem 0.5rem 3rem;
 }
 
 .header-item {
@@ -196,6 +196,11 @@ button {
     border-bottom: 1px solid #000;
 }
 
+.problem-container {
+    display: flex;
+    justify-content: center; /* Center horizontally */
+    align-items: start; /* Center vertically */
+}
 
 .worksheet-problems {
     display: grid;
@@ -203,12 +208,6 @@ button {
     padding: 1rem;
     grid-template-columns: repeat(auto-fit, minmax(50px, 1fr));
     flex-grow: 1;
-}
-
-.problem-container {
-    display: flex;
-    justify-content: center; /* Center horizontally */
-    align-items: center; /* Center vertically */
 }
   
 /* Individual problem styling */
