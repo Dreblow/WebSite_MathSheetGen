@@ -62,13 +62,26 @@ function generateProblems() {
 }
 
 // ====================================================
-// RENDER PROBLEMS IN VERTICAL STACK FORMAT
+// RENDER PROBLEMS WITH DYNAMIC GRID LAYOUT
 // ====================================================
 function renderProblems(allProblems) {
     worksheetDiv.innerHTML = "";
   
+    const problemsPerPage = parseInt(problemsPerPageInput.value);
+    const numRows = Math.ceil(Math.sqrt(problemsPerPage)); // Square root for balanced grid
+    const numCols = Math.ceil(problemsPerPage / numRows); // Columns based on rows
+  
+    // Set dynamic grid template
+    worksheetDiv.style.display = "grid";
+    worksheetDiv.style.gridTemplateColumns = `repeat(${numCols}, 1fr)`;
+    worksheetDiv.style.gridTemplateRows = `repeat(${numRows}, 1fr)`;
+    worksheetDiv.style.gap = "1rem"; // Maintain consistent spacing
+  
     allProblems.forEach((problems) => {
       problems.forEach((problem) => {
+        const problemContainerDiv = document.createElement("div");
+        problemContainerDiv.classList.add("problem-container");
+
         const problemDiv = document.createElement("div");
         problemDiv.classList.add("problem");
   
@@ -79,12 +92,12 @@ function renderProblems(allProblems) {
           const operator = match[2];
           let num2 = match[3];
   
-          // Add a non-breaking space before single digits to align properly
+          // Add non-breaking space for single digits to align properly
           if (num1.length === 1) {
-            num1 = `&nbsp&nbsp;${num1}`; // Add non-breaking space for alignment
+            num1 = `&nbsp;&nbsp;${num1}`; // Add space to align single digits
           }
           if (num2.length === 1) {
-            num2 = `&nbsp&nbsp;${num2}`;
+            num2 = `&nbsp;&nbsp;${num2}`;
           }
   
           // Create the problem layout
@@ -94,16 +107,19 @@ function renderProblems(allProblems) {
             <div class="answer-line"></div>
           `;
         }
+
+        // Add problem to the problem container
+        problemContainerDiv.appendChild(problemDiv);
   
-        // Add the problem to the worksheet
-        worksheetDiv.appendChild(problemDiv);
+        // Add problem to the dynamically generated grid
+        worksheetDiv.appendChild(problemContainerDiv);
       });
     });
   
     // Enable the download button after generating
     downloadButton.disabled = false;
     downloadButton.classList.add("enabled");
-  }
+}
 
 // ====================================================
 // DOWNLOAD PDF FUNCTION
@@ -127,3 +143,10 @@ async function downloadPDF() {
 // ====================================================
 generateButton.addEventListener("click", generateProblems);
 downloadButton.addEventListener("click", downloadPDF);
+
+// ====================================================
+// AUTO-GENERATE ON PAGE LOAD
+// ====================================================
+window.onload = () => {
+    generateProblems();
+};
