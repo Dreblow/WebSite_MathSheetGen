@@ -177,6 +177,17 @@ generateButton.addEventListener("click", generateProblems);
 downloadButton.addEventListener("click", downloadPDF);
 
 // ====================================================
+// AUTO-SELECT INPUT CONTENT ON CLICK
+// ====================================================
+const allInputs = document.querySelectorAll("input");
+
+allInputs.forEach((input) => {
+  input.addEventListener("click", (event) => {
+    event.target.select();
+  });
+});
+
+// ====================================================
 // AUTO-GENERATE ON PAGE LOAD
 // ====================================================
 window.onload = () => {
