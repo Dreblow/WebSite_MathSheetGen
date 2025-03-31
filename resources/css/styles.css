@@ -165,12 +165,44 @@ button {
    WORKSHEET STYLING
 ==================================================== */
 .worksheet {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    width: 8.5in; /* Letter size width */
+    height: 11in; /* Letter size height */
     border: 2px solid #ccc;
     border-radius: 6px;
     background-color: #fff;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    width: 8.5in; /* Maintain paper width */
-    height: 11in; /* Maintain paper height */
+}
+
+.worksheet-header {
+    display: flex;
+    justify-content: space-between;
+    font-size: 16px;
+    height: 50px;
+    padding: 0 3rem; /* Add padding to prevent name and date from being too close to the edge */
+}
+
+.header-item {
+    display: flex;
+    gap: 0.5rem;
+    align-items: flex-end;
+}
+
+.name-line, .date-line {
+    display: inline-block;
+    width: 200px;
+    border-bottom: 1px solid #000;
+}
+
+
+.worksheet-problems {
+    display: grid;
+    gap: 1rem;
+    padding: 1rem;
+    grid-template-columns: repeat(auto-fit, minmax(50px, 1fr));
+    flex-grow: 1;
 }
 
 .problem-container {

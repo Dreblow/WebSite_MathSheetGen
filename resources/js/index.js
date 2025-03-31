@@ -8,7 +8,40 @@ const maxNumberInput = document.getElementById("maxNumber");
 const operationSelect = document.getElementById("operation");
 const generateButton = document.getElementById("generateButton");
 const downloadButton = document.getElementById("downloadButton");
-const worksheetDiv = document.getElementById("worksheet");
+
+// References to worksheet sections
+const headerDiv = document.querySelector(".worksheet-header");
+const worksheetDiv = document.querySelector(".worksheet");
+const problemsDiv = document.querySelector(".worksheet-problems");
+
+
+// ====================================================
+// RENDER HEADER FUNCTION
+// ====================================================
+function renderHeader() {
+    // Clear previous content
+    headerDiv.innerHTML = "";
+  
+    // Name section
+    const nameDiv = document.createElement("div");
+    nameDiv.classList.add("header-item");
+    nameDiv.innerHTML = `
+      <label>Name:</label>
+      <span class="name-line"></span>
+    `;
+  
+    // Date section
+    const dateDiv = document.createElement("div");
+    dateDiv.classList.add("header-item");
+    dateDiv.innerHTML = `
+      <label>Date:</label>
+      <span class="date-line"></span>
+    `;
+  
+    // Add name and date to header
+    headerDiv.appendChild(nameDiv);
+    headerDiv.appendChild(dateDiv);
+  }
 
 // ====================================================
 // GENERATE PROBLEMS
@@ -57,25 +90,26 @@ function generateProblems() {
 
     allProblems.push(problems);
   }
-
+  
+  renderHeader();
   renderProblems(allProblems);
 }
 
 // ====================================================
-// RENDER PROBLEMS WITH DYNAMIC GRID LAYOUT
+// RENDER PROBLEMS FUNCTION
 // ====================================================
 function renderProblems(allProblems) {
-    worksheetDiv.innerHTML = "";
+    problemsDiv.innerHTML = "";
   
     const problemsPerPage = parseInt(problemsPerPageInput.value);
     const numRows = Math.ceil(Math.sqrt(problemsPerPage)); // Square root for balanced grid
     const numCols = Math.ceil(problemsPerPage / numRows); // Columns based on rows
   
     // Set dynamic grid template
-    worksheetDiv.style.display = "grid";
-    worksheetDiv.style.gridTemplateColumns = `repeat(${numCols}, 1fr)`;
-    worksheetDiv.style.gridTemplateRows = `repeat(${numRows}, 1fr)`;
-    worksheetDiv.style.gap = "1rem"; // Maintain consistent spacing
+    problemsDiv.style.display = "grid";
+    problemsDiv.style.gridTemplateColumns = `repeat(${numCols}, 1fr)`;
+    problemsDiv.style.gridTemplateRows = `repeat(${numRows}, 1fr)`;
+    problemsDiv.style.gap = "1rem"; // Maintain consistent spacing
   
     allProblems.forEach((problems) => {
       problems.forEach((problem) => {
@@ -110,9 +144,7 @@ function renderProblems(allProblems) {
 
         // Add problem to the problem container
         problemContainerDiv.appendChild(problemDiv);
-  
-        // Add problem to the dynamically generated grid
-        worksheetDiv.appendChild(problemContainerDiv);
+        problemsDiv.appendChild(problemContainerDiv);
       });
     });
   
@@ -125,17 +157,17 @@ function renderProblems(allProblems) {
 // DOWNLOAD PDF FUNCTION
 // ====================================================
 async function downloadPDF() {
-  const input = document.getElementById("worksheet");
-  const canvas = await html2canvas(input);
-  const imgData = canvas.toDataURL("image/png");
-  const pdf = new jsPDF("p", "mm", "a4");
+    const input = document.querySelector(".worksheet");
+    const canvas = await html2canvas(input);
+    const imgData = canvas.toDataURL("image/png");
+    const pdf = new jsPDF("p", "mm", "a4");
 
-  const imgProps = pdf.getImageProperties(imgData);
-  const pdfWidth = pdf.internal.pageSize.getWidth();
-  const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
+    const imgProps = pdf.getImageProperties(imgData);
+    const pdfWidth = pdf.internal.pageSize.getWidth();
+    const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
 
-  pdf.addImage(imgData, "PNG", 0, 0, pdfWidth, pdfHeight);
-  pdf.save("math-worksheet.pdf");
+    pdf.addImage(imgData, "PNG", 0, 0, pdfWidth, pdfHeight);
+    pdf.save("math-worksheet.pdf");
 }
 
 // ====================================================
