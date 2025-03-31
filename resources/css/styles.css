@@ -173,7 +173,8 @@ button {
     border: 2px solid #ccc;
     border-radius: 6px;
     background-color: #fff;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    box-shadow: none; /* Remove any shadows for clean PDF output */
+    border: none;
 }
 
 .worksheet-header {

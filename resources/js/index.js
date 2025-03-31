@@ -160,6 +160,9 @@ async function downloadPDF() {
     const input = document.querySelector(".worksheet");
     const canvas = await html2canvas(input);
     const imgData = canvas.toDataURL("image/png");
+
+    // Use UMD version of jsPDF
+    const { jsPDF } = window.jspdf;
     const pdf = new jsPDF("p", "mm", "a4");
 
     const imgProps = pdf.getImageProperties(imgData);
@@ -167,7 +170,17 @@ async function downloadPDF() {
     const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
 
     pdf.addImage(imgData, "PNG", 0, 0, pdfWidth, pdfHeight);
-    pdf.save("math-worksheet.pdf");
+
+    // Get the current date and time
+    const now = new Date();
+    const formattedDate = now.toLocaleDateString().replace(/\//g, "-"); // Format: YYYY-MM-DD
+    const formattedTime = now.toLocaleTimeString().replace(/:/g, "-"); // Format: HH-MM-SS
+
+    // Set the file name with date and time
+    const fileName = `math-worksheet-${formattedDate}_${formattedTime}.pdf`;
+
+    // Save the PDF with the dynamic name
+    pdf.save(fileName);
 }
 
 // ====================================================
