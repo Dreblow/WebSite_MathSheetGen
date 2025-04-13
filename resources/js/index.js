@@ -47,13 +47,20 @@ function renderHeader() {
 // GENERATE PROBLEMS
 // ====================================================
 function generateProblems() {
-  const problemsPerPage = parseInt(problemsPerPageInput.value);
+  const MAX_PROBLEMS_PER_PAGE = 64;
   const numPages = parseInt(numPagesInput.value);
   const minNumber = parseInt(minNumberInput.value);
   const maxNumber = parseInt(maxNumberInput.value);
   const operation = operationSelect.value;
 
+  var problemsPerPage = parseInt(problemsPerPageInput.value);
+
   let allProblems = [];
+
+  if (problemsPerPage > MAX_PROBLEMS_PER_PAGE) {
+    problemsPerPage = MAX_PROBLEMS_PER_PAGE;
+    problemsPerPageInput.value = MAX_PROBLEMS_PER_PAGE; // Updates the webpage input
+  }
 
   for (let page = 0; page < numPages; page++) {
     let problems = [];
