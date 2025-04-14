@@ -197,18 +197,18 @@ button {
     border-bottom: 1px solid #000;
 }
 
-.problem-container {
-    display: flex;
-    justify-content: center; /* Center horizontally */
-    align-items: start; /* Center vertically */
-}
-
 .worksheet-problems {
     display: grid;
     gap: 1rem;
-    padding: 1rem;
+    padding: 0 1rem 1rem 1rem; /* top right bottom left */
     grid-template-columns: repeat(auto-fit, minmax(50px, 1fr));
     flex-grow: 1;
+}
+
+.problem-container {
+  display: flex;
+  justify-content: center; /* Center horizontally */
+  align-items: start; /* Center vertically */
 }
   
 /* Individual problem styling */

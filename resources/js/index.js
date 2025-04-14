@@ -114,8 +114,8 @@ function renderProblems(allProblems) {
   
     // Set dynamic grid template
     problemsDiv.style.display = "grid";
-    problemsDiv.style.gridTemplateColumns = `repeat(${numCols}, 1fr)`;
-    problemsDiv.style.gridTemplateRows = `repeat(${numRows}, 1fr)`;
+    problemsDiv.style.gridTemplateColumns = `repeat(${numCols}, auto)`;
+    problemsDiv.style.gridTemplateRows = `repeat(${numRows}, auto)`;
     problemsDiv.style.gap = "1rem"; // Maintain consistent spacing
   
     allProblems.forEach((problems) => {
@@ -164,7 +164,7 @@ function renderProblems(allProblems) {
 // DOWNLOAD PDF FUNCTION
 // ====================================================
 async function downloadPDF() {
-    const input = document.querySelector(".worksheet");
+    const input = document.querySelector(".worksheet-container");
     const canvas = await html2canvas(input);
     const imgData = canvas.toDataURL("image/png");
 
