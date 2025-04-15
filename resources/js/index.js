@@ -18,7 +18,7 @@ const problemsDiv = document.querySelector(".worksheet-problems");
 // ====================================================
 // RENDER HEADER FUNCTION
 // ====================================================
-function renderHeader() {
+function renderHeader(headerDiv) {
     // Clear previous content
     headerDiv.innerHTML = "";
   
@@ -57,6 +57,12 @@ function generateProblems() {
 
   let allProblems = [];
 
+  // Clear worksheet-container in index.html
+  const worksheetContainer = document.querySelector(".worksheet-container");
+  const pagebreakContainer = document.querySelector(".worksheet-pagebreak-container");
+  pagebreakContainer.innerHTML = "";
+
+  // Check for max problems
   if (problemsPerPage > MAX_PROBLEMS_PER_PAGE) {
     problemsPerPage = MAX_PROBLEMS_PER_PAGE;
     problemsPerPageInput.value = MAX_PROBLEMS_PER_PAGE; // Updates the webpage input
@@ -98,14 +104,37 @@ function generateProblems() {
     allProblems.push(problems);
   }
   
-  renderHeader();
-  renderProblems(allProblems);
+
+  // For each page of problems, create a page div
+  allProblems.forEach((problems) => {
+    const pageDiv = document.createElement("div");
+    pageDiv.classList.add("worksheet", "page-break");
+
+    const headerDiv = document.createElement("div");
+    headerDiv.classList.add("worksheet-header");
+
+    const problemsDiv = document.createElement("div");
+    problemsDiv.classList.add("worksheet-problems");
+
+    pageDiv.appendChild(headerDiv);
+    pageDiv.appendChild(problemsDiv);
+
+    pagebreakContainer.appendChild(pageDiv);
+
+    renderHeader(headerDiv);
+    renderProblems(problemsDiv, problems);
+  });
+
+    
+  // Enable the download button after generating
+  downloadButton.disabled = false;
+  downloadButton.classList.add("enabled");
 }
 
 // ====================================================
 // RENDER PROBLEMS FUNCTION
 // ====================================================
-function renderProblems(allProblems) {
+function renderProblems(problemsDiv, allProblems) {
     problemsDiv.innerHTML = "";
   
     const problemsPerPage = parseInt(problemsPerPageInput.value);
@@ -118,76 +147,71 @@ function renderProblems(allProblems) {
     problemsDiv.style.gridTemplateRows = `repeat(${numRows}, auto)`;
     problemsDiv.style.gap = "1rem"; // Maintain consistent spacing
   
-    allProblems.forEach((problems) => {
-      problems.forEach((problem) => {
-        const problemContainerDiv = document.createElement("div");
-        problemContainerDiv.classList.add("problem-container");
+    allProblems.forEach((problem) => {
+      const problemContainerDiv = document.createElement("div");
+      problemContainerDiv.classList.add("problem-container");
 
-        const problemDiv = document.createElement("div");
-        problemDiv.classList.add("problem");
-  
-        // Extract numbers and operator
-        const match = problem.match(/(\d+)\s*([\+\-])\s*(\d+)/);
-        if (match) {
-          let num1 = match[1];
-          const operator = match[2];
-          let num2 = match[3];
-  
-          // Add non-breaking space for single digits to align properly
-          if (num1.length === 1) {
-            num1 = `&nbsp;&nbsp;${num1}`; // Add space to align single digits
-          }
-          if (num2.length === 1) {
-            num2 = `&nbsp;&nbsp;${num2}`;
-          }
-  
-          // Create the problem layout
-          problemDiv.innerHTML = `
-            <div class="top-number">${num1}</div>
-            <div class="bottom-number">${operator} ${num2}</div>
-            <div class="answer-line"></div>
-          `;
+      const problemDiv = document.createElement("div");
+      problemDiv.classList.add("problem");
+
+      // Extract numbers and operator
+      const match = problem.match(/(\d+)\s*([\+\-])\s*(\d+)/);
+      if (match) {
+        let num1 = match[1];
+        const operator = match[2];
+        let num2 = match[3];
+
+        // Add non-breaking space for single digits to align properly
+        if (num1.length === 1) {
+          num1 = `&nbsp;&nbsp;${num1}`; // Add space to align single digits
+        }
+        if (num2.length === 1) {
+          num2 = `&nbsp;&nbsp;${num2}`;
         }
 
-        // Add problem to the problem container
-        problemContainerDiv.appendChild(problemDiv);
-        problemsDiv.appendChild(problemContainerDiv);
-      });
+        // Create the problem layout
+        problemDiv.innerHTML = `
+          <div class="top-number">${num1}</div>
+          <div class="bottom-number">${operator} ${num2}</div>
+          <div class="answer-line"></div>
+        `;
+      }
+
+      // Add problem to the problem container
+      problemContainerDiv.appendChild(problemDiv);
+      problemsDiv.appendChild(problemContainerDiv);
     });
-  
-    // Enable the download button after generating
-    downloadButton.disabled = false;
-    downloadButton.classList.add("enabled");
 }
 
 // ====================================================
 // DOWNLOAD PDF FUNCTION
 // ====================================================
 async function downloadPDF() {
-    const input = document.querySelector(".worksheet-container");
-    const canvas = await html2canvas(input);
-    const imgData = canvas.toDataURL("image/png");
+  const pages = document.querySelectorAll(".worksheet");
+  const { jsPDF } = window.jspdf;
+  const pdf = new jsPDF("p", "mm", "a4");
 
-    // Use UMD version of jsPDF
-    const { jsPDF } = window.jspdf;
-    const pdf = new jsPDF("p", "mm", "a4");
+  for (let i = 0; i < pages.length; i++) {
+    const canvas = await html2canvas(pages[i]);
+    const imgData = canvas.toDataURL("image/png");
 
     const imgProps = pdf.getImageProperties(imgData);
     const pdfWidth = pdf.internal.pageSize.getWidth();
     const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
 
+    if (i > 0) {
+      pdf.addPage(); // Add new page after first
+    }
+
     pdf.addImage(imgData, "PNG", 0, 0, pdfWidth, pdfHeight);
+  }
 
-    // Get the current date and time
-    const now = new Date();
-    const formattedDate = now.toLocaleDateString().replace(/\//g, "-"); // Format: YYYY-MM-DD
-    const formattedTime = now.toLocaleTimeString().replace(/:/g, "-"); // Format: HH-MM-SS
+  const now = new Date();
+  const formattedDate = now.toLocaleDateString().replace(/\//g, "-");
+  const formattedTime = now.toLocaleTimeString().replace(/:/g, "-");
 
-    // Set the file name with date and time
-    const fileName = `math-worksheet-${formattedDate}_${formattedTime}.pdf`;
-
-    // Save the PDF with the dynamic name
-    pdf.save(fileName);
+  const fileName = `math-worksheet-${formattedDate}_${formattedTime}.pdf`;
+  pdf.save(fileName);
 }
 
 // ====================================================
