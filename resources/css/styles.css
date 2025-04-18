@@ -159,6 +159,7 @@ button {
     padding: 2rem;
     box-sizing: border-box;
     background-color: #f5f5f5; /* Light background for paper effect */
+    border-radius: 12px;
   }
 
   .worksheet-pagebreak-container {
