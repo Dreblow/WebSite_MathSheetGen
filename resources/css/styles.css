@@ -32,7 +32,7 @@ h1 {
    DESCRIPTION SECTION
 ==================================================== */
 .description {
-  text-align: center;
+  text-align: justify;
   font-size: 1rem;
   margin-top: -0.5rem;
   margin-bottom: 1.5rem;
@@ -41,6 +41,27 @@ h1 {
   margin-left: auto;
   margin-right: auto;
   line-height: 1.6;
+}
+
+/* ====================================================
+   Author Thoughts SECTION
+==================================================== */
+
+.authorsThoughts {
+  padding: 1.5rem;
+  background-color: #f9f9f9;
+  border-radius: 12px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-bottom: 2rem;
+}
+
+.authorsThoughts h3 {
+  margin-top: 0;
+}
+
+.authorsThoughts p {
+  margin: 0;
+  text-align: justify;
 }
 
 /* ====================================================
