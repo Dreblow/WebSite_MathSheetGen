@@ -29,6 +29,53 @@ h1 {
 }
 
 /* ====================================================
+   Hamburger Menu SECTION
+==================================================== */
+.nav {
+  position: relative;
+  text-align: right;
+  margin-bottom: 1rem;
+}
+
+.hamburger {
+  font-size: 28px;
+  cursor: pointer;
+  user-select: none;
+  display: block; /* Always visible */
+}
+
+/* Default hidden nav */
+.nav-links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: none;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 1rem;
+  background-color: #fff;
+  position: absolute;
+  top: 100%;
+  right: 0;
+  padding: 1rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  z-index: 10;
+}
+
+/* Show nav when active */
+.nav-links.active {
+  display: flex;
+}
+
+/* Nav links */
+.nav-links li a {
+  text-decoration: none;
+  font-weight: bold;
+  color: #333;
+}
+
+/* ====================================================
    DESCRIPTION SECTION
 ==================================================== */
 .description {
