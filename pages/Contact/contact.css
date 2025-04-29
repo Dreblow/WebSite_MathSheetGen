@@ -1,50 +1,63 @@
 .contact-form {
-    max-width: 500px;
-    margin: 2rem auto;
-    padding: 2rem;
-    background-color: #f9f9f9;
-    border-radius: 12px;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-  }
+  max-width: 500px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background-color: #f9f9f9;
+  border-radius: 12px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
   
-  .contact-form input,
-  .contact-form textarea {
-    width: 100%;
-    padding: 0.75rem;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    font-size: 1rem;
-  }
+.contact-form input,
+.contact-form textarea {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 1rem;
+}
   
-  .contact-form textarea {
-    resize: vertical;
-    min-height: 150px;
-    max-height: 300px; 
-  }
+.contact-form textarea {
+  resize: vertical;
+  min-height: 150px;
+  max-height: 300px; 
+}
   
-  .contact-form button {
-    background-color: #4caf50;
-    color: white;
-    border: none;
-    font-size: 1rem;
-    border-radius: 8px;
-    cursor: pointer;
-    width: 150px;
-    align-self: center; /* Center the button */
-  }
+.contact-form button {
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  font-size: 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  width: 150px;
+  align-self: center; /* Center the button */
+}
   
-  .contact-form button:hover {
-    background-color: #45a049;
-  }
-  
-#workingMessage,
-#successPopup {
-  display: none; /* Hide by default */
+.contact-form button:hover {
+  background-color: #45a049;
+}
+
+#successPopup,
+#workingMessage {
+  display: none;
+  position: fixed;
+  top: 30%;
+  left: 50%;
+  transform: translate(-50%, -30%);
+  background-color: #ffffff;
+  color: #333;
+  padding: 2.5rem 3rem; /* More padding horizontally */
+  border-radius: 12px;
+  z-index: 1000;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
   text-align: center;
-  margin-top: 1rem;
-  font-weight: bold;
-  color: #4caf50; /* Optional: Make success text green */
+  font-size: 1.2rem; /* Slightly bigger font */
+  max-width: 400px;   /* Wider max width */
+  width: 90%;         /* 90% of screen width on small devices */
+
+  opacity: 0;
+  transition: opacity 0.5s ease;
 }
