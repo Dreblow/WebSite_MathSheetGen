@@ -1,6 +1,6 @@
 <?php
 // Validate and sanitize input
-$name = filter_var(trim($_POST['name']), FILTER_SANITIZE_STRING);
+$name = htmlspecialchars(trim($_POST['name']));
 $email = filter_var(trim($_POST['email']), FILTER_VALIDATE_EMAIL);
 $message = htmlspecialchars(trim($_POST['message']));
 
@@ -13,13 +13,13 @@ if (!empty($_POST['website']) || !$name || !$email || empty($message)) {
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
-// Update these paths to reflect the actual location of PHPMailer
-require '/var/www/html/global/PHPMailer-master/src/Exception.php';
-require '/var/www/html/global/PHPMailer-master/src/PHPMailer.php';
-require '/var/www/html/global/PHPMailer-master/src/SMTP.php';
+// Load PHPMailer from correct local path
+require __DIR__ . '/../../global/PHPMailer-master/src/Exception.php';
+require __DIR__ . '/../../global/PHPMailer-master/src/PHPMailer.php';
+require __DIR__ . '/../../global/PHPMailer-master/src/SMTP.php';
 
 // Load SMTP credentials from an external file
-$config = require '/var/www/html/resources/config.php';
+$config = require __DIR__ . '/../../resources/config.php';
 
 $mail = new PHPMailer(true);
 
@@ -40,14 +40,13 @@ try {
 
     // Content
     $mail->isHTML(false);  // Set email format to plain text
-    $mail->Subject = 'Dreblow Designs New contact message from ' . $name;
+    $mail->Subject = 'Math Sheet Gen New contact message from ' . $name;
     $mail->Body    = "Name: $name\nEmail: $email\n\nMessage:\n$message";
 
     $mail->send();
-    
+
     // Return a response for AJAX
-    header("Location: /pages/Contact/thank-you.html");
-    exit;
+    echo 'Message has been sent';
 } catch (Exception $e) {
     echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
 }

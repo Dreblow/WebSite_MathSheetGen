@@ -1,6 +1,6 @@
 .contact-form {
     max-width: 500px;
-    margin: 2rem auto; /* Center it horizontally */
+    margin: 2rem auto;
     padding: 2rem;
     background-color: #f9f9f9;
     border-radius: 12px;
@@ -8,49 +8,43 @@
     display: flex;
     flex-direction: column;
     gap: 1rem;
-}
-
-.contact-form label {
-    font-weight: bold;
-    margin-bottom: 0.5rem;
-    text-align: left;
-    width: 100%;
-}
-
-.contact-form input,
-.contact-form textarea {
+  }
+  
+  .contact-form input,
+  .contact-form textarea {
     width: 100%;
     padding: 0.75rem;
     border: 1px solid #ccc;
     border-radius: 8px;
     font-size: 1rem;
-    box-sizing: border-box;
-}
-
-.contact-form textarea {
-    min-height: 120px;
+  }
+  
+  .contact-form textarea {
     resize: vertical;
-}
-
-.contact-form button {
+    min-height: 150px;
+    max-height: 300px; 
+  }
+  
+  .contact-form button {
     background-color: #4caf50;
     color: white;
     border: none;
-    padding: 0.75rem 1.5rem;
     font-size: 1rem;
     border-radius: 8px;
     cursor: pointer;
-    transition: background-color 0.3s ease;
-    width: 100%;
-}
-
-.contact-form button:hover {
+    width: 150px;
+    align-self: center; /* Center the button */
+  }
+  
+  .contact-form button:hover {
     background-color: #45a049;
-}
-
-/* Status messages */
-#status {
-    margin-top: 1rem;
-    font-size: 1rem;
-    text-align: center;
+  }
+  
+#workingMessage,
+#successPopup {
+  display: none; /* Hide by default */
+  text-align: center;
+  margin-top: 1rem;
+  font-weight: bold;
+  color: #4caf50; /* Optional: Make success text green */
 }
