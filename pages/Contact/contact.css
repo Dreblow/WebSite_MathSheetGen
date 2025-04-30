@@ -40,6 +40,11 @@
   background-color: #45a049;
 }
 
+#successPopup.visible,
+#workingMessage.visible {
+  opacity: 1;
+}
+
 #successPopup,
 #workingMessage {
   display: none;
