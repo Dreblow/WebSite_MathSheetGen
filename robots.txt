@@ -1,3 +1,6 @@
 User-agent: *
 Allow: /
-Sitemap: https://mathsheetgen.com/sitemap.xml
+Disallow: /pages/contact/
+Disallow: /pages/privacypolicy.html
+Disallow: /pages/termsofservice.html
+Sitemap: https://www.mathsheetgen.com/sitemap.xml
