@@ -36,7 +36,7 @@ try {
     // Set email fields
     $mail->setFrom('noreply@mathsheetgen.com', 'MathSheetGen Contact');
     $mail->addReplyTo($email, $name);
-    $mail->addAddress('Derek.Dreblow@gmail.com');  // Add a recipient
+    $mail->addAddress('derek.dreblow@dreblowdesigns.com');  // Add a recipient
 
     // Content
     $mail->isHTML(false);  // Set email format to plain text
