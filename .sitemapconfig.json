@@ -1,13 +1,23 @@
 {
-  "siteUrl": "https://www.mathsheetgen.com",
-  "includeExtensions": [".html"],
-  "exclude": [
-    "resources/dev/",
-    "resources/js/",
-    "resources/css/",
-    "resources/images/",
-    "drafts/",
-    "404.html"
-  ],
-  "changefreq": "monthly"
+    "sitemap": {
+        "siteUrl": "https://www.mathsheetgen.com",
+        "includeExtensions": [".html"],
+        "exclude": [
+        "local_dev/",
+        "resources/dev/",
+        "resources/js/",
+        "resources/css/",
+        "resources/images/",
+        "drafts/",
+        "404.html"
+        ],
+
+        "changefreq": "monthly"
+    },
+
+    "server": {
+        "nginx": {
+            "extraRules": "server/nginx/extra-rules.conf"
+        }
+    }
 }
