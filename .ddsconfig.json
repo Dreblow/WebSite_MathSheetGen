@@ -1,0 +1,39 @@
+{
+    "sitemap": {
+        "siteUrl": "https://www.mathsheetgen.com",
+        "includeExtensions": [".html"],
+        "exclude": [
+            ".vscode/",
+            "global/",
+            "local_dev/",
+            "pages/blog/local_py/",
+            "resources/",
+            "server/",
+            ".git/",
+            ".gitignore",
+            "README.md",
+            "404.html"
+        ],
+
+        "changefreq": "monthly"
+    },
+
+    "imageBuild": {
+        "exclude": [
+            ".vscode/",
+
+            "local_dev/",
+            "pages/blog/local_py/",
+
+            "server/",
+            ".git/",
+            ".gitignore",
+            "README.md",
+            "404.html"
+        ],
+
+        "build": [
+            "server/nginx/extra-rules.conf"
+        ]
+    }
+}
